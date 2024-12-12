@@ -45,5 +45,10 @@ public class HibernateUtil {
             StandardServiceRegistryBuilder.destroy(serviceRegistry);
         }
     }
+
+	public static void shutdown() {
+		getSessionFactory().close();
+		
+	}
 }
 
