@@ -1,3 +1,5 @@
+package com.projet.Entites;
+
 import java.io.Serializable;
 import java.util.Objects;
 

@@ -1,6 +1,16 @@
-import java.util.Date;
+package com.projet.Entites;
 
-import jakarta.persistence.*;
+import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 @Entity
@@ -28,7 +38,7 @@ public class Employe {
     @Temporal(TemporalType.DATE)
     private Date dateEngagement;
     
-    @Column(name = "Salaire", precision = 6, scale = 2)
+    @Column(name = "Salaire", precision = 6)
     private double salaire;
 
     // Getters et Setters

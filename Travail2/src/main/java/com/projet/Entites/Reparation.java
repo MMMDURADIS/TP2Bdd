@@ -1,5 +1,15 @@
-import jakarta.persistence.*;
+package com.projet.Entites;
+
 import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.IdClass;
 
 @Entity
 @Table(name = "Reparation")
@@ -15,7 +25,7 @@ public class Reparation {
     @JoinColumn(name = "Technicien_matricule")
     private Technicien technicien;
     
-    @Column(name = "CoutTotal", nullable = false, precision = 6, scale = 2)
+    @Column(name = "CoutTotal", nullable = false, precision = 6)
     private double coutTotal;
     
     @Column(name = "date", nullable = false)

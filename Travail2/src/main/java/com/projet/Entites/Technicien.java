@@ -1,4 +1,12 @@
-import jakarta.persistence.*;
+package com.projet.Entites;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
 import java.util.Set;
 
 @Entity

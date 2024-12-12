@@ -1,4 +1,10 @@
-import jakarta.persistence.*;
+package com.projet.Entites;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
@@ -11,7 +17,7 @@ public class Test {
     @Column(name = "nom", nullable = false)
     private String nom;
     
-    @Column(name = "seuil", nullable = false, precision = 3, scale = 2)
+    @Column(name = "seuil", nullable = false, precision = 3)
     private double seuil;
     
     @OneToMany(mappedBy = "test")

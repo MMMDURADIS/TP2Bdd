@@ -1,4 +1,10 @@
-import jakarta.persistence.*;
+package com.projet.Entites;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
@@ -11,10 +17,10 @@ public class Type {
     @Column(name = "capacite")
     private int capacite;
     
-    @Column(name = "poids", precision = 6, scale = 2)
+    @Column(name = "poids", precision = 6)
     private double poids;
     
-    @Column(name = "rayonAction", precision = 6, scale = 2)
+    @Column(name = "rayonAction", precision = 6)
     private double rayonAction;
 
     @ManyToMany(mappedBy = "specialisations")
