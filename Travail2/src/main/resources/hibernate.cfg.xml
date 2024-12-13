@@ -8,7 +8,8 @@
   <property name="hibernate.connection.username">hibernate_user</property>
   <property name="hibernate.connection.password">Q%ff!vc</property>
   <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.hbm2ddl.auto">create-drop</property>
+  
   <mapping class="com.projet.Entites.Adresse"/>
   <mapping class="com.projet.Entites.Employe"/>
   <mapping class="com.projet.Entites.Technicien"/>

@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import com.projet.Util.CodePostal;
 
 @Entity
 @Table(name = "Adresse")
@@ -17,13 +18,14 @@ public class Adresse {
     @Column(name = "numeroRue", nullable = false)
     private int numeroRue;
     
-    @Column(name = "nomRue")
+    @Column(name = "nomRue", nullable = false)
     private String nomRue;
     
     @Column(name = "ville", nullable = false)
     private String ville;
     
     @Column(name = "codePostal", nullable = false)
+    @CodePostal
     private String codePostal;
     
     @Column(name = "province", nullable = false)
@@ -46,7 +48,7 @@ public class Adresse {
     public void setVille(String ville) { this.ville = ville; }
     
     public String getCodePostal() { return codePostal; }
-    public void setCodePostal(String codePostal) { this.codePostal = codePostal; }
+    public void setCodePostal(String codePostal) { this.codePostal = codePostal.toUpperCase(); }
     
     public String getProvince() { return province; }
     public void setProvince(String province) { this.province = province; }

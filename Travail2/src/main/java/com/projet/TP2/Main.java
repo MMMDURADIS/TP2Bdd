@@ -9,11 +9,18 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.projet.Util.HibernateUtil;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+
 import com.projet.Entites.*;
 
 
 public class Main {
-
+	private static Boolean faireErreur = true;
+	private static Boolean erreurProduite = false;
 	public static void main(String[] args) {
 		String message = "Execution";
 		System.out.print(message);
@@ -39,6 +46,7 @@ public class Main {
 		    adresse2.setProvince("ON");
 		    adresse2.setPays("Canada");
 		    session.persist(adresse2);
+		    	
 
 		    // Création et insertion de Types
 		    Type type1 = new Type();
@@ -160,8 +168,15 @@ public class Main {
 		    avionTest2.setTest(test2);
 		    avionTest2.setDate(new Date());
 		    session.persist(avionTest2);
-
 		    transaction.commit();
+		    
+		    
+		    transaction = session.beginTransaction();
+		    
+		    if (faireErreur)
+		    	PersistMauvaisCodePostal(session);
+		    transaction.commit();
+		    
 			
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -169,19 +184,97 @@ public class Main {
 			}
 			e.printStackTrace();
 		} finally {
-			message = "Fin de l'exécution, appuyer sur n'importe quel touche pour finir et réinitialiser";
-			Scanner scanner = new Scanner(System.in);
-
-	        System.out.println(message);
-	        scanner.nextLine(); // Waits for the user to press Enter
-	        
-	        message = "Fermeture du programme";
-	        System.out.println(message);
-	        scanner.close();
-			session.close();
+			if (!erreurProduite) {
+				message = "Fin de l'exécution, appuyer sur n'importe quel touche pour finir et réinitialiser";
+		        System.out.println(message);
+		        Scanner scanner = new Scanner(System.in);
+		        try {
+		        	scanner.nextLine();
+		        } catch(java.util.NoSuchElementException e) {
+		        } finally {
+		        	scanner.close();
+		        }
+			}
+			
+			System.out.println("Fermeture du programme");
+	        session.close();
 			HibernateUtil.shutdown();
+	         
 		}
 
-	}	
+	}
+	
+	public static void PersistMauvaisCodePostal(Session session) {
+		
+		System.out.print("Violation de la condition optionnelle :\n");
+		
+		Adresse adresse3 = new Adresse();
+		adresse3.setNumeroRue(456);
+	    adresse3.setNomRue("Boulevard des Pilotes");
+	    adresse3.setVille("Toronto");
+	    adresse3.setCodePostal("M5M  5M5");
+	    adresse3.setProvince("ON");
+	    adresse3.setPays("Canada");
+	    
+	    
+	    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<Adresse>> violations = validator.validate(adresse3);
+
+        // Affiche les violations
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<Adresse> violation : violations) {
+                System.out.println(violation.getPropertyPath() + " " + violation.getMessage());
+            }
+            violations.clear();
+        } else {
+            System.out.println("Aucune violation détectée");
+            session.persist(adresse3);
+        }
+	    
+	    Scanner scanner = new Scanner(System.in);
+	    System.out.println("Appuyer pour continuer et tester la violation de la condition normale");
+	    adresse3.setCodePostal("MMM 5M5");
+	    scanner.nextLine();
+	    
+        violations = validator.validate(adresse3);
+
+        // Affiche les violations
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<Adresse> violation : violations) {
+                System.out.println(violation.getPropertyPath() + " " + violation.getMessage());
+            }
+            violations.clear();
+        } else {
+            System.out.println("Aucune violation détectée");
+            session.persist(adresse3);
+        }
+        
+        System.out.println("Appuyer pour tester un code valide");
+	    adresse3.setCodePostal("M5q 8v7");
+	    scanner.nextLine();
+	    
+        violations = validator.validate(adresse3);
+
+        // Affiche les violations
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<Adresse> violation : violations) {
+                System.out.println(violation.getPropertyPath() + " " + violation.getMessage());
+            }
+            violations.clear();
+        } else {
+            System.out.println("Aucune violation détectée");
+            session.persist(adresse3);
+        }
+	    
+	    System.out.println("Appuyer pour terminer ce test");
+	    scanner.nextLine();
+	    scanner.close();
+	    
+	    return;
+	    
+	}
+	
 }
 
