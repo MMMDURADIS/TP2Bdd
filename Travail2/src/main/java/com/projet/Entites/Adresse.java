@@ -41,6 +41,9 @@ public class Adresse {
     @Column(name = "pays", nullable = false)
     private String pays;
 
+    @OneToMany(mappedBy = "adresse")
+    private Set<Employe> employees;
+
     // Getters et Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
