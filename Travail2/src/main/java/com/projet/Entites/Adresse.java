@@ -3,10 +3,13 @@ package com.projet.Entites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import java.util.Set;
 
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
@@ -40,6 +43,9 @@ public class Adresse {
     
     @Column(name = "pays", nullable = false)
     private String pays;
+
+    @OneToMany(mappedBy = "adresse")
+    private Set<Employe> employees;
 
     // Getters et Setters
     public int getId() { return id; }
