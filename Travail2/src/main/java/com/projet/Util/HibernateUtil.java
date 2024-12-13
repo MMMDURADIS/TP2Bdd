@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Util;
 
 import org.hibernate.SessionFactory;
@@ -5,13 +6,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import jakarta.persistence.EntityManager;
+
 public class HibernateUtil {
  
     private static SessionFactory sessionFactory = buildSessionFactory();
     private static ServiceRegistry serviceRegistry;
+    private static EntityManager entityManager;
     
     private static SessionFactory buildSessionFactory() {
-    	// Cr�er une fabrique de session � partir des param�tres du fichier hibernate.cfg.xml
+
     	Configuration configuration = new Configuration();
         configuration.configure("hibernate.cfg.xml");
         
@@ -36,8 +40,15 @@ public class HibernateUtil {
     }
  
     public static SessionFactory getSessionFactory() {
-    	if(sessionFactory == null) sessionFactory = buildSessionFactory();
+    	if(sessionFactory == null) 
+    		sessionFactory = buildSessionFactory();
         return sessionFactory;
+    }
+    
+    public static EntityManager getEntityManager() {
+    	if(entityManager == null) 
+    		entityManager = getSessionFactory().createEntityManager();
+    	return entityManager;
     }
     
     public void close() throws Exception{
@@ -47,6 +58,8 @@ public class HibernateUtil {
     }
 
 	public static void shutdown() {
+		if (entityManager != null)
+			entityManager.close();
 		getSessionFactory().close();
 		
 	}

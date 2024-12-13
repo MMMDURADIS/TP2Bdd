@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Entites;
 
 import java.util.Date;
@@ -21,24 +22,24 @@ public class Employe {
     @Column(name = "matricule")
     private int matricule;
     
-    @Column(name = "nom")
+    @Column(name = "nom", length = 45, nullable = false)
     private String nom;
     
-    @Column(name = "prenom")
+    @Column(name = "prenom", length = 45, nullable = false)
     private String prenom;
     
     @ManyToOne
     @JoinColumn(name = "adresse", nullable = false)
     private Adresse adresse;
     
-    @Column(name = "tel")
+    @Column(name = "tel", length = 45)
     private String tel;
     
     @Column(name = "dateEngagement", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dateEngagement;
     
-    @Column(name = "Salaire", precision = 6)
+    @Column(name = "Salaire", precision = 8)
     private double salaire;
 
     // Getters et Setters

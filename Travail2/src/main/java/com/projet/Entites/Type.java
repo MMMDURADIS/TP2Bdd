@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Entites;
 
 import jakarta.persistence.Entity;
@@ -17,10 +18,10 @@ public class Type {
     @Column(name = "capacite")
     private int capacite;
     
-    @Column(name = "poids", precision = 6)
+    @Column(name = "poids", precision = 8)
     private double poids;
     
-    @Column(name = "rayonAction", precision = 6)
+    @Column(name = "rayonAction", precision = 8)
     private double rayonAction;
 
     @ManyToMany(mappedBy = "specialisations")

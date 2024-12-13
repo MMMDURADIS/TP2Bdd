@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" >
+  <!--Ludovic Hébert et Enrik Bernier-->
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.projet.bdd2</groupId>
   <artifactId>Travail2</artifactId>
@@ -25,12 +26,28 @@
 	    <artifactId>jakarta.el</artifactId>
 	    <version>4.0.2</version> <!-- Version compatible avec Hibernate Validator -->
 	</dependency>
+	<dependency>
+	    <groupId>org.jboss.logging</groupId>
+	    <artifactId>jboss-logging</artifactId>
+	    <version>3.6.1.Final</version>
+	</dependency>
 
 	<dependency>
-    	<groupId>org.hibernate.search</groupId>
-	    <artifactId>hibernate-search-backend-elasticsearch</artifactId>
-	    <version>7.2.2.Final</version>
-	</dependency>
+        <groupId>org.hibernate.search</groupId>
+        <artifactId>hibernate-search-bom</artifactId>
+        <version>7.2.2.Final</version>
+        <type>pom</type>
+    </dependency>
+    <dependency>
+       <groupId>org.hibernate.search</groupId>
+       <artifactId>hibernate-search-mapper-orm</artifactId>
+       <version>7.2.2.Final</version>
+    </dependency>
+    <dependency>
+       <groupId>org.hibernate.search</groupId>
+       <artifactId>hibernate-search-backend-lucene</artifactId>
+       <version>7.2.2.Final</version>
+    </dependency>
 	<dependency>
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-api</artifactId>

@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Entites;
 
 import jakarta.persistence.Entity;
@@ -6,9 +7,14 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+
 import com.projet.Util.CodePostal;
 
 @Entity
+@Indexed
 @Table(name = "Adresse")
 public class Adresse {
     @Id
@@ -24,8 +30,9 @@ public class Adresse {
     @Column(name = "ville", nullable = false)
     private String ville;
     
-    @Column(name = "codePostal", nullable = false)
+    @Column(name = "codePostal", length = 45, nullable = false)
     @CodePostal
+    @FullTextField
     private String codePostal;
     
     @Column(name = "province", nullable = false)

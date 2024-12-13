@@ -1,7 +1,9 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.TP2;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -14,13 +16,20 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
+import org.hibernate.search.mapper.orm.session.SearchSession;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import com.projet.Entites.*;
 
 
 public class Main {
 	private static Boolean faireErreur = true;
+	private static Boolean faireRecherche = true;
 	private static Boolean erreurProduite = false;
+	
 	public static void main(String[] args) {
 		String message = "Execution";
 		System.out.print(message);
@@ -176,7 +185,10 @@ public class Main {
 		    if (faireErreur)
 		    	PersistMauvaisCodePostal(session);
 		    transaction.commit();
+		    transaction = null;
 		    
+		    if (faireRecherche)
+		    	FaireRechercheCodePostal();
 			
 		} catch (Exception e) {
 			if (transaction != null) {
@@ -273,7 +285,38 @@ public class Main {
 	    scanner.close();
 	    
 	    return;
-	    
+	}
+	
+	static void FaireRechercheCodePostal() {
+		
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		SearchSession searchSession = Search.session(entityManager);
+		MassIndexer indexer = searchSession.massIndexer( Adresse.class ).threadsToLoadObjects(1);
+		try {
+			indexer.startAndWait();
+			System.out.println("Recherche avec critere");
+			List<Adresse> result = searchSession.search(Adresse.class)
+			    .where(f -> f.match()
+			        .field("codePostal")
+			        .matching("H1A"))
+			    .fetchHits(20);
+			result.forEach(adresse -> System.out.println("Adresse "+adresse.getId()+": " + adresse.getCodePostal()));
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		Scanner scanner = new Scanner(System.in);
+	    System.out.println("Appuyer pour finir la recherche");
+	    if (scanner.hasNextLine()) {
+	        scanner.nextLine();
+	    } else
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	    scanner.close();
 	}
 	
 }

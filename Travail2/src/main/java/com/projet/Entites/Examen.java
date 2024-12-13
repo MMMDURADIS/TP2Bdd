@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Entites;
 
 import jakarta.persistence.Entity;
@@ -14,7 +15,7 @@ public class Examen {
     @Column(name = "identifiant")
     private int identifiant;
     
-    @Column(name = "description")
+    @Column(name = "description", length = 45)
     private String description;
     
     @Column(name = "Examencol", columnDefinition = "TEXT")

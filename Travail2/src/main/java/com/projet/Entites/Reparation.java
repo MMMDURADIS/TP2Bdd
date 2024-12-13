@@ -1,3 +1,4 @@
+//Ludovic Hébert et Enrik Bernier
 package com.projet.Entites;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class Reparation {
     @JoinColumn(name = "Technicien_matricule")
     private Technicien technicien;
     
-    @Column(name = "CoutTotal", nullable = false, precision = 6)
+    @Column(name = "CoutTotal", nullable = false, precision = 8)
     private double coutTotal;
     
     @Column(name = "date", nullable = false)
