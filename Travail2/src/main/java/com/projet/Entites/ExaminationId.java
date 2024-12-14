@@ -15,7 +15,6 @@ public class ExaminationId implements Serializable {
         this.examen = examen;
     }
 
-    // equals() et hashCode()
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

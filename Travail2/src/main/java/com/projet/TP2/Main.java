@@ -137,6 +137,19 @@ public class Main {
 		    avion2.setMatricule(3002);
 		    avion2.setType(type2);
 		    session.persist(avion2);
+		    
+		    //Ajout des avions aux pilotes
+		    Set<Avion> avionsPilote1 = pilote1.getAvionsPilotes();
+		    avionsPilote1.add(avion1);
+		    avionsPilote1.add(avion2);
+		    pilote1.setAvionsPilotes(avionsPilote1);
+		    
+		    Set<Avion> avionsPilote2 = pilote2.getAvionsPilotes();
+		    avionsPilote2.add(avion1);
+		    pilote2.setAvionsPilotes(avionsPilote2);
+		    
+		    session.merge(pilote1);
+		    session.merge(pilote2);
 
 		    // Création et insertion de Réparations
 		    Reparation reparation1 = new Reparation();

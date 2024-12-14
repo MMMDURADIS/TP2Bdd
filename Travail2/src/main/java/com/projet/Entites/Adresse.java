@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
@@ -27,7 +28,7 @@ public class Adresse {
     @Column(name = "numeroRue", nullable = false)
     private int numeroRue;
     
-    @Column(name = "nomRue", nullable = false)
+    @Column(name = "nomRue", nullable = true)
     private String nomRue;
     
     @Column(name = "ville", nullable = false)
@@ -45,7 +46,7 @@ public class Adresse {
     private String pays;
 
     @OneToMany(mappedBy = "adresse")
-    private Set<Employe> employees;
+    private Set<Employe> employees = new HashSet<Employe>();
 
     // Getters et Setters
     public int getId() { return id; }

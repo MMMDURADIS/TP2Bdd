@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +24,7 @@ public class Test {
     private double seuil;
     
     @OneToMany(mappedBy = "test")
-    private Set<AvionTest> avionTests;
+    private Set<AvionTest> avionTests = new HashSet<AvionTest>();
 
     // Getters et Setters
     public int getNumero() { return numero; }

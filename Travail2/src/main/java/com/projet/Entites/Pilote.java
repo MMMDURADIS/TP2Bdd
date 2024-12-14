@@ -8,6 +8,8 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinTable;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -28,10 +30,10 @@ public class Pilote extends Employe {
         joinColumns = @JoinColumn(name = "Pilote_matricule"),
         inverseJoinColumns = @JoinColumn(name = "Avion_matricule")
     )
-    private Set<Avion> avionsPilotes;
+    private Set<Avion> avionsPilotes = new HashSet<Avion>();
     
     @OneToMany(mappedBy = "pilote")
-    private Set<Examination> examinations;
+    private Set<Examination> examinations = new HashSet<Examination>();
 
     // Getters et Setters
     public Set<Type> getQualifications() { return qualifications; }

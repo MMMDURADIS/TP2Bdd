@@ -17,29 +17,29 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "Employe")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Employe {
+public abstract class Employe {
     @Id
     @Column(name = "matricule")
     private int matricule;
     
-    @Column(name = "nom", length = 45, nullable = false)
+    @Column(name = "nom", length = 45, nullable = true)
     private String nom;
     
-    @Column(name = "prenom", length = 45, nullable = false)
+    @Column(name = "prenom", length = 45, nullable = true)
     private String prenom;
     
     @ManyToOne
-    @JoinColumn(name = "adresse", nullable = false)
+    @JoinColumn(name = "adresse", nullable = true)
     private Adresse adresse;
     
-    @Column(name = "tel", length = 45)
+    @Column(name = "tel", length = 45, nullable = true)
     private String tel;
     
     @Column(name = "dateEngagement", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dateEngagement;
     
-    @Column(name = "Salaire", precision = 8)
+    @Column(name = "Salaire", precision = 8, nullable = true)
     private double salaire;
 
     // Getters et Setters

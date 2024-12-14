@@ -16,7 +16,6 @@ public class ReparationId implements Serializable {
 	     this.technicien = technicien;
 	 }
 	
-	 // equals() et hashCode()
 	 @Override
 	 public boolean equals(Object o) {
 	     if (this == o) return true;

@@ -15,7 +15,6 @@ public class AvionTestId implements Serializable {
         this.test = test;
     }
 
-    // equals() et hashCode()
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

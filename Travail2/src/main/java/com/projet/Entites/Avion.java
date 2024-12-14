@@ -9,6 +9,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.JoinColumn;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,17 +21,17 @@ public class Avion {
     private int matricule;
     
     @ManyToOne
-    @JoinColumn(name = "Type_nom", nullable = false)
+    @JoinColumn(name = "Type_nom", nullable = true)
     private Type type;
     
     @OneToMany(mappedBy = "avion")
-    private Set<Reparation> reparations;
+    private Set<Reparation> reparations = new HashSet<Reparation>();
     
     @OneToMany(mappedBy = "avion")
-    private Set<AvionTest> tests;
+    private Set<AvionTest> tests = new HashSet<AvionTest>();
     
     @ManyToMany(mappedBy = "avionsPilotes")
-    private Set<Pilote> pilotes;
+    private Set<Pilote> pilotes = new HashSet<Pilote>();
 
     // Getters et Setters
     public int getMatricule() { return matricule; }

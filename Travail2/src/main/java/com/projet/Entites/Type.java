@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,20 +17,20 @@ public class Type {
     @Column(name = "nom")
     private String nom;
     
-    @Column(name = "capacite")
+    @Column(name = "capacite", nullable = true)
     private int capacite;
     
-    @Column(name = "poids", precision = 8)
+    @Column(name = "poids", precision = 8, nullable = true)
     private double poids;
     
-    @Column(name = "rayonAction", precision = 8)
+    @Column(name = "rayonAction", precision = 8, nullable = true)
     private double rayonAction;
 
     @ManyToMany(mappedBy = "specialisations")
-    private Set<Technicien> techniciens;
+    private Set<Technicien> techniciens = new HashSet<Technicien>();
 
     @ManyToMany(mappedBy = "qualifications")
-    private Set<Pilote> pilotes;
+    private Set<Pilote> pilotes = new HashSet<Pilote>();
 
     // Getters et Setters
     public String getNom() { return nom; }
