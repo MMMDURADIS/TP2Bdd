@@ -1,6 +1,7 @@
 //Ludovic Hébert et Enrik Bernier
 package com.projet.TP2;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -211,7 +212,7 @@ public class Main {
 			System.out.println("Fermeture du programme");
 	        session.close();
 			HibernateUtil.shutdown();
-	         
+			NettoyerIndex();
 		}
 
 	}
@@ -264,7 +265,7 @@ public class Main {
         }
         
         System.out.println("Appuyer pour tester un code valide");
-	    adresse3.setCodePostal("M5q 8v7");
+	    adresse3.setCodePostal("M5q8v7");
 	    scanner.nextLine();
 	    
         violations = validator.validate(adresse3);
@@ -317,6 +318,26 @@ public class Main {
 				e.printStackTrace();
 			}
 	    scanner.close();
+	}
+	
+	public static void NettoyerIndex() {
+		String folderPath = "Adresse";
+
+        File folder = new File(folderPath);
+        
+        System.out.println("Recherche dossier");
+        if (!folder.isDirectory())
+        	return;
+        System.out.println("Dossier Trouvé");
+        File[] files = folder.listFiles();
+        if (files == null) 
+        	return;
+        System.out.println("Fichiers trouvés");
+        for (File file : files) {
+            if (file.isFile())
+            	file.delete();
+        }
+        System.out.println("Fichiers supprimés");
 	}
 	
 }
