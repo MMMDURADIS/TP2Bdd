@@ -24,14 +24,13 @@
 	<dependency>
 	    <groupId>org.glassfish</groupId>
 	    <artifactId>jakarta.el</artifactId>
-	    <version>4.0.2</version> <!-- Version compatible avec Hibernate Validator -->
+	    <version>4.0.2</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.jboss.logging</groupId>
 	    <artifactId>jboss-logging</artifactId>
 	    <version>3.6.1.Final</version>
 	</dependency>
-
 	<dependency>
         <groupId>org.hibernate.search</groupId>
         <artifactId>hibernate-search-bom</artifactId>
